@@ -1,0 +1,45 @@
+def cardapio():
+   
+    refeicoes = [
+        {'nome': 'arroz com ovo', 'preço': 5.00},
+        {'nome': 'feijoada', 'preço': 6.00},
+        {'nome': 'carne de boi', 'preço': 10.00},
+        {'nome': 'batata frita', 'preço': 8.00},
+        {'nome': 'picanha', 'preço': 20.00},
+        {'nome': 'frango assado', 'preço': 15.00},
+        {'nome': 'costela de porco', 'preço': 18.00},
+        {'nome': 'salmão grelhado', 'preço': 25.00},
+        {'nome': 'bife de chorizo', 'preço': 22.00}
+    ]
+    
+    
+    sobremesas = [
+        {'nome': 'pudim', 'preço': 7.00},
+        {'nome': 'sorvete', 'preço': 6.00},
+        {'nome': 'torta de limão', 'preço': 8.00},
+        {'nome': 'mousse de chocolate', 'preço': 9.00},
+        {'nome': 'bolo de cenoura', 'preço': 7.00}
+    ]
+    
+   
+    bebidas = [
+        {'nome': 'cajuina', 'preço': 8.00},
+        {'nome': 'refrigerante', 'preço': 4.00},
+        {'nome': 'suco de laranja', 'preço': 5.00},
+        {'nome': 'água mineral', 'preço': 3.00},
+        {'nome': 'cerveja', 'preço': 6.00},
+        {'nome': 'vinho tinto', 'preço': 15.00}
+    ]
+    
+    print('Refeições:\n-----------------------------')
+    for i, prato in enumerate(refeicoes, start=1):
+        print(f"{i}. {prato['nome']} - R${prato['preço']:.2f}")
+    
+    print('\nSobremesas:\n-----------------------------')
+    for i, prato in enumerate(sobremesas, start=len(refeicoes) + 1):
+        print(f"{i}. {prato['nome']} - R${prato['preço']:.2f}")
+    
+    print('\nBebidas:\n-----------------------------')
+    for i, prato in enumerate(bebidas, start=len(refeicoes) + len(sobremesas) + 1):
+        print(f"{i}. {prato['nome']} - R${prato['preço']:.2f}")
+cardapio()
