@@ -18,12 +18,16 @@ def solicitar_pedido():
         return
 
     # Valida se a mesa está entre 1 e 5 e se já foi usada
-    while not (mesa_numero.isdigit() and 1 <= int(mesa_numero) <= 5) or mesa_numero in mesas_usadas:
-        if mesa_numero in mesas_usadas:
-            print(f"A mesa {mesa_numero} já fez o pedido. Escolha outra mesa.")
-        else:
-            print("Número de mesa inválido! Por favor, insira um número de mesa entre 1 e 5.")
-        mesa_numero = input("\nInforme o número da mesa em que você está agora (1 a 5) ou digite 'sair' para pular: ").strip().lower()
+    while True:
+        try:
+            if not (mesa_numero.isdigit() and 1 <= int(mesa_numero) <= 5):
+                raise ValueError("Número de mesa inválido! Por favor, insira um número de mesa entre 1 e 5.")
+            if mesa_numero in mesas_usadas:
+                raise ValueError(f"A mesa {mesa_numero} já fez o pedido. Escolha outra mesa.")
+            break
+        except ValueError as e:
+            print(e)
+            mesa_numero = input("\nInforme o número da mesa em que você está agora (1 a 5) ou digite 'sair' para pular: ").strip().lower()
 
     # Adiciona a mesa ao conjunto de mesas que já fizeram pedidos
     mesas_usadas.add(mesa_numero)
@@ -39,13 +43,15 @@ def solicitar_pedido():
     # Verifica as escolhas feitas
     for escolha in escolhas:
         escolha = escolha.strip()  # Remove espaços em branco
-        if escolha.isdigit() and 1 <= int(escolha) <= len(pratos):
+        try:
+            if not (escolha.isdigit() and 1 <= int(escolha) <= len(pratos)):
+                raise ValueError(f"Escolha inválida: {escolha}. Por favor, tente novamente.")
             prato = pratos[int(escolha) - 1]
             pratos_escolhidos.append(prato)
             total += prato['preço']
-        else:
-            print(f"\nEscolha inválida: {escolha}. Por favor, tente novamente.")
-    
+        except valor invalido as e:
+            print(e)
+
     # Se houver pratos escolhidos, adiciona o pedido à mesa
     if pratos_escolhidos:
         mesas.adicionar_pedido(mesa_numero, pratos_escolhidos)  # Adiciona o pedido à mesa
@@ -62,7 +68,7 @@ for _ in range(5):
     solicitar_pedido()
 
 # Pergunta se o usuário quer ver o pedido de uma mesa específica, mas apenas das mesas que já pediram
-if mesas_usadas:
+while mesas_usadas:
     ver_mesa = input("\nDeseja ver o pedido de uma mesa específica? (s/n): ").strip().lower()
 
     if ver_mesa == 's':
@@ -80,10 +86,4 @@ if mesas_usadas:
         if pedido_da_mesa:
             print(f"\nPedido da mesa {mesa_para_ver}:")
             for prato in pedido_da_mesa:
-                print(f"{prato['nome']} - R${prato['preço']:.2f}")
-        else:
-            print(f"\nNão há pedidos registrados para a mesa {mesa_para_ver}.")
-    else:
-        print("\nObrigado por utilizar o nosso sistema!")
-else:
-    print("\nNenhuma mesa fez pedidos.")
+                print(f"{prato['nome']} - 
