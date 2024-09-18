@@ -86,4 +86,17 @@ while mesas_usadas:
         if pedido_da_mesa:
             print(f"\nPedido da mesa {mesa_para_ver}:")
             for prato in pedido_da_mesa:
-                print(f"{prato['nome']} - 
+                print(f"{prato['nome']} - R${prato['preço']:.2f}")
+        else:
+            print(f"\nNão há pedidos registrados para a mesa {mesa_para_ver}.")
+        
+        # Pergunta se deseja ver outra mesa
+        continuar = input("\nDeseja ver o pedido de outra mesa? (s/n): ").strip().lower()
+        if continuar != 's':
+            break
+    else:
+        print("\nObrigado por utilizar o nosso sistema!")
+        break
+
+if not mesas_usadas:
+    print("\nNenhuma mesa fez pedidos.")
